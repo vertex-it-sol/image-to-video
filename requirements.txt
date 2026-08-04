@@ -1,0 +1,39 @@
+# Dependencies for the photo -> 3D mesh -> Blender turntable pipeline.
+#
+# torch/torchvision are deliberately NOT listed. They must match your CUDA build
+# and are already installed here as 2.13.0+cu130 / 0.28.0+cu130 (Blackwell sm_120).
+# Installing them via a bare `torch` requirement — as Hunyuan3D-2's own
+# requirements.txt does — can silently replace a working CUDA build with a CPU one.
+# If you need them on a fresh machine, pick the right index explicitly, e.g.:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+#
+# Blender is NOT a pip dependency either: `pip install bpy` requires Python 3.13
+# and this venv is 3.10. Run ./setup_blender.sh instead.
+
+# Stage 1 - background removal
+# rembg >= 2.0.70 requires Python >= 3.11, so pin for 3.10.
+rembg==2.0.67
+onnxruntime
+numpy
+
+# Stage 2 - Hunyuan3D-2 multiview shape generation (see Hunyuan3D-2/ checkout)
+diffusers
+transformers
+accelerate
+einops
+omegaconf
+opencv-python
+safetensors
+huggingface_hub
+tqdm
+pyyaml
+trimesh
+# Both are hard imports in hy3dgen.shapegen. scikit-image is commented out in
+# Hunyuan3D-2's own requirements.txt but surface_extractors.py imports it anyway.
+pymeshlab
+scikit-image
+
+# Stage 4 - encoding frames to MP4
+imageio
+imageio-ffmpeg
+Pillow

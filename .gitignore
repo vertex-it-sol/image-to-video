@@ -1,0 +1,3 @@
+blender/
+**/__pycache__/
+*.pyc
