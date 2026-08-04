@@ -1,7 +1,7 @@
 """
 Run the whole pipeline: photos -> cutouts -> mesh -> rendered frames -> MP4.
 
-    python run_pipeline.py --front inputs/front.png --back inputs/back.png --output spin.mp4
+    python run_pipeline.py --front inputs/front.png --back inputs/back.png --output output/spin.mp4
 
 Stages 1 and 2 run in this interpreter. Stage 3 runs in Blender's own Python via
 subprocess (Blender bundles its own interpreter and cannot import this venv), and
@@ -28,7 +28,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--front", default="inputs/front.png", help="Front product photo")
     parser.add_argument("--back", default="inputs/back.png", help="Back product photo")
-    parser.add_argument("--output", default="spin.mp4")
+    parser.add_argument("--output", default="output/spin.mp4")
     parser.add_argument("--workdir", default="output")
     parser.add_argument("--res", type=int, default=720)
     parser.add_argument("--frames", type=int, default=120, help="120 frames at 30fps = a 4s revolution")

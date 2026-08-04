@@ -76,7 +76,7 @@ Python 3.13). `run_pipeline.py` therefore shells out to the Blender binary for s
 | `blender/` | Extracted Blender 5.2 LTS binary |
 | `inputs/` | Your input photos (`front.png` / `back.png`) |
 | `output/` | Intermediate artifacts: cutouts, mesh, rendered frames |
-| `spin.mp4` | Final output video |
+| `output/spin.mp4` | Final output video |
 
 ## Prerequisites
 
@@ -104,7 +104,7 @@ and enough system RAM that nothing else is competing for it during model load
 Full pipeline, from your two photos to a finished video:
 
 ```bash
-.venv/bin/python run_pipeline.py --front inputs/front.png --back inputs/back.png --output spin.mp4
+.venv/bin/python run_pipeline.py --front inputs/front.png --back inputs/back.png --output output/spin.mp4
 ```
 
 Defaults: 720x720 resolution, 120 frames, 30fps (a 4-second loop), Cycles+CUDA
@@ -115,12 +115,12 @@ rendering, cylindrical photo projection.
 ```bash
 # Higher resolution / longer clip
 .venv/bin/python run_pipeline.py --front inputs/front.png --back inputs/back.png \
-    --output spin.mp4 --res 1080 --frames 240
+    --output output/spin.mp4 --res 1080 --frames 240
 
 # Re-render only (skip re-running background removal and mesh generation,
 # e.g. while tuning lighting/projection)
 .venv/bin/python run_pipeline.py --front inputs/front.png --back inputs/back.png \
-    --output spin.mp4 --skip isolate mesh
+    --output output/spin.mp4 --skip isolate mesh
 
 # Calibration pass: 4 stills at 0/90/180/270 degrees instead of a full render,
 # to check the mesh is right-side-up and facing the right way before spending
@@ -130,7 +130,7 @@ rendering, cylindrical photo projection.
 
 # If the product's front doesn't face the camera at frame 1, nudge it:
 .venv/bin/python run_pipeline.py --front inputs/front.png --back inputs/back.png \
-    --output spin.mp4 --yaw-offset 90
+    --output output/spin.mp4 --yaw-offset 90
 ```
 
 Run any single stage directly for debugging:
